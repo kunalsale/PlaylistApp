@@ -7,7 +7,6 @@ class PlaylistRepository(
     private val playlistService: PlaylistService
 ) {
     suspend fun getPlaylists(): Flow<Result<List<Playlist>>> {
-        playlistService.fetchPlaylist()
-        return flow {  }
+        return playlistService.fetchPlaylist()
     }
 }
