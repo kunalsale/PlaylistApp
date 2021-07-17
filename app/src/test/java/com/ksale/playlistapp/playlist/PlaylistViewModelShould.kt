@@ -1,4 +1,4 @@
-package com.ksale.playlistapp
+package com.ksale.playlistapp.playlist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.outsideintddexample.acceptancetests.MainCoroutineScopeRule

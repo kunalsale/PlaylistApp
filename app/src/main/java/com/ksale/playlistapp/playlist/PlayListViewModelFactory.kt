@@ -1,4 +1,4 @@
-package com.ksale.playlistapp
+package com.ksale.playlistapp.playlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

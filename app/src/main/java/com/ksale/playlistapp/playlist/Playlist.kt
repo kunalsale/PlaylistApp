@@ -1,5 +1,5 @@
-package com.ksale.playlistapp
+package com.ksale.playlistapp.playlist
 
-import android.graphics.drawable.Drawable
+import com.ksale.playlistapp.R
 
 data class Playlist(val id: String, val imagePlaylist: Int = R.drawable.playlist, val playlist: String, val category: String)

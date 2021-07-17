@@ -1,11 +1,11 @@
-package com.ksale.playlistapp
+package com.ksale.playlistapp.playlist
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.ksale.playlistapp.databinding.FragmentPlaylistBinding
 
 class PlaylistRecyclerAdapter(

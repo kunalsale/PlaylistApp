@@ -2,6 +2,7 @@ package com.ksale.playlistapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ksale.playlistapp.playlist.PlaylistFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

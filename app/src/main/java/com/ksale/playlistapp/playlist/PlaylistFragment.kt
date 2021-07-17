@@ -1,4 +1,4 @@
-package com.ksale.playlistapp
+package com.ksale.playlistapp.playlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ksale.playlistapp.R
 
 /**
  * A fragment representing a list of Items.
