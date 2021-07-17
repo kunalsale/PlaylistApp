@@ -7,5 +7,4 @@ class PlayListViewModelFactory(private val repository: PlaylistRepository): View
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return PlayListViewModel(repository) as T
     }
-
 }
