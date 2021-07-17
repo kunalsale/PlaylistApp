@@ -10,7 +10,6 @@ import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import petros.efthymiou.groovy.utils.getValueForTest
@@ -27,13 +26,9 @@ class PlaylistViewModelShould {
     val repository: PlaylistRepository = mock()
     val playlist = mock<List<Playlist>>()
     val expected = Result.success(playlist)
+    private val exception = RuntimeException("Something went wrong")
 
-    init {
-
-    }
-
-    @Before
-    fun setUp() {
+    fun setUpViewModel(): PlayListViewModel {
         runBlocking {
             whenever(repository.getPlaylists()).thenReturn(
                 flow {
@@ -41,18 +36,34 @@ class PlaylistViewModelShould {
                 }
             )
         }
-        viewModel = PlayListViewModel(repository)
+        return PlayListViewModel(repository)
     }
 
     @Test
     fun getPlaylistFromRepository() = runBlockingTest {
+        val viewModel = setUpViewModel()
         viewModel.playlists.getValueForTest()
         verify(repository, times(1)).getPlaylists()
     }
 
     @Test
     fun emitPlaylistFromRepository() = runBlockingTest {
-        viewModel = PlayListViewModel(repository)
+        val viewModel = setUpViewModel()
+        System.out.println("PlayListViewModel " + expected)
+        System.out.println("PlayListViewModel " + viewModel.playlists.getValueForTest())
         assertEquals(expected, viewModel.playlists.getValueForTest())
+    }
+
+    @Test
+    fun emitErrorWhenReceivesError() {
+        runBlocking {
+            whenever(repository.getPlaylists()).thenReturn(
+                flow {
+                    emit(Result.failure<List<Playlist>>(exception))
+                }
+            )
+        }
+        val viewModel = PlayListViewModel(repository)
+        assertEquals(exception, viewModel.playlists.getValueForTest()!!.exceptionOrNull())
     }
 }
