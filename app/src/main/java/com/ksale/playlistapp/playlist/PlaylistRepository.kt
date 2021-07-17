@@ -1,9 +1,13 @@
 package com.ksale.playlistapp.playlist
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-class PlaylistRepository {
+class PlaylistRepository(
+    private val playlistService: PlaylistService
+) {
     suspend fun getPlaylists(): Flow<Result<List<Playlist>>> {
-        TODO("Not yet implemented")
+        playlistService.fetchPlaylist()
+        return flow {  }
     }
 }
