@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ksale.playlistapp.R
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * A fragment representing a list of Items.
@@ -17,8 +20,14 @@ class PlaylistFragment : Fragment() {
 
     lateinit var viewModel: PlayListViewModel
     lateinit var viewModelFactory: PlayListViewModelFactory
-    val playlistAPI = PlaylistAPI()
-    val playlistService = PlaylistService(playlistAPI)
+    private val retrofit = Retrofit.Builder()
+        .baseUrl("http://192.168.29.124:3000/")
+        .client(OkHttpClient())
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    private val api = retrofit.create(PlaylistAPI::class.java)
+    val playlistService = PlaylistService(api)
     private val repository = PlaylistRepository(playlistService)
 
     override fun onCreateView(
@@ -33,7 +42,6 @@ class PlaylistFragment : Fragment() {
                 setUpList(view, list)
             }
             else {
-                TODO()
             }
         })
         return view

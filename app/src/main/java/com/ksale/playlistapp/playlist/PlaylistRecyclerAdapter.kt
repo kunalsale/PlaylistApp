@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.ksale.playlistapp.R
 import com.ksale.playlistapp.databinding.FragmentPlaylistBinding
 
 class PlaylistRecyclerAdapter(
@@ -24,9 +25,9 @@ class PlaylistRecyclerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = playlist[position]
-        holder.tvPlaylist.text = item.playlist
+        holder.tvPlaylist.text = item.name
         holder.tvCategory.text = item.category
-        holder.imgPlaylist.background = ContextCompat.getDrawable(holder.itemView.context, item.imagePlaylist)
+        holder.imgPlaylist.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.playlist)
     }
 
     override fun getItemCount(): Int = playlist.size

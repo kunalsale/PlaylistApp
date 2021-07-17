@@ -42,6 +42,8 @@ class PlaylistFeature {
 
     @Test
     fun displayListOfPlaylist() {
+        Thread.sleep(4000)
+
         assertRecyclerViewItemCount(R.id.rvPlaylist, 10)
 
         // Check the name of first item in the playlist
@@ -56,7 +58,7 @@ class PlaylistFeature {
 
         // Check the image of first item in the playlist
         onView(allOf(withId(R.id.imgPlaylist), isDescendantOfA(nthChildOf(withId(R.id.rvPlaylist), 0))))
-            .check(matches(withDrawable(R.mipmap.ic_launcher)))
+            .check(matches(withDrawable(R.drawable.playlist)))
             .check(matches(isDisplayed()))
     }
 

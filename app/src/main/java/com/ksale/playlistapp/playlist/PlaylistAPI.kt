@@ -1,7 +1,8 @@
 package com.ksale.playlistapp.playlist
 
-class PlaylistAPI {
-    suspend fun fetchAllPlaylist(): List<Playlist> {
-        TODO("Not yet implemented")
-    }
+import retrofit2.http.GET
+
+interface PlaylistAPI {
+    @GET("playlist")
+    suspend fun fetchAllPlaylist(): List<Playlist>
 }
