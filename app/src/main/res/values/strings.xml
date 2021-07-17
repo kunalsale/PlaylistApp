@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PlaylistApp</string>
+    <string name="playlist_screen_name">Playlist</string>
 </resources>
