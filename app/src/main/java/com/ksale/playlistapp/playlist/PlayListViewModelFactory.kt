@@ -2,8 +2,9 @@ package com.ksale.playlistapp.playlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import javax.inject.Inject
 
-class PlayListViewModelFactory(private val repository: PlaylistRepository): ViewModelProvider.Factory {
+class PlayListViewModelFactory @Inject constructor(private val repository: PlaylistRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return PlayListViewModel(repository) as T
     }

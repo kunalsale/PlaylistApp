@@ -5,30 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ksale.playlistapp.R
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * A fragment representing a list of Items.
  */
+@AndroidEntryPoint
 class PlaylistFragment : Fragment() {
 
     lateinit var viewModel: PlayListViewModel
+    @Inject
     lateinit var viewModelFactory: PlayListViewModelFactory
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.29.124:3000/")
-        .client(OkHttpClient())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val api = retrofit.create(PlaylistAPI::class.java)
-    val playlistService = PlaylistService(api)
-    private val repository = PlaylistRepository(playlistService)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +30,7 @@ class PlaylistFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_playlist_list, container, false)
         setUpViewModel()
-        viewModel.playlists.observe(this, { playlists ->
+        viewModel.playlists.observe(this as LifecycleOwner, { playlists ->
             val list = playlists.getOrNull()
             if(list != null) {
                 setUpList(view, list)
@@ -58,7 +52,6 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        viewModelFactory = PlayListViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[PlayListViewModel::class.java]
     }
 
